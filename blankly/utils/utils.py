@@ -44,7 +44,7 @@ default_general_settings = {
         },
         "binance": {
             "cash": "USDT",
-            "binance_tld": "us"
+            "binance_tld": "com"
         },
         "kucoin": {
             "cash": "USDT"
@@ -81,7 +81,7 @@ default_backtest_settings = {
         "cache_location": "./price_caches",
         "continuous_caching": True,
         "resample_account_value_for_metrics": "1d",
-        "quote_account_value_in": "USD",
+        "quote_account_value_in": "USDT",
         "ignore_user_exceptions": False,
         "risk_free_return_rate": 0.0,
         "benchmark_symbol": None

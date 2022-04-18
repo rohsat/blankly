@@ -3,7 +3,7 @@
 """
 
 from blankly import Strategy, StrategyState, Interface
-from blankly import Alpaca
+from blankly import Binance
 from blankly.indicators import sma
 
 
@@ -42,10 +42,10 @@ def price_event(price, symbol, state: StrategyState):
 
 
 if __name__ == "__main__":
-    alpaca = Alpaca()
-    s = Strategy(alpaca)
-    s.add_price_event(price_event, 'SNAP', resolution='1h', init=init)
-    s.add_price_event(price_event, 'GME', resolution='1h', init=init)
-    s.backtest(initial_values={'USD': 10000}, to='2y')
+    ex = Binance()
+    s = Strategy(ex)
+    s.add_price_event(price_event, 'BTC-USDT', resolution='1h', init=init)
+    #s.add_price_event(price_event, 'GME', resolution='1h', init=init)
+    s.backtest(initial_values={'USDT': 10000}, to='2y')
     # Or just run it directly on the exchange
     # s.start()

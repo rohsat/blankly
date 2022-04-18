@@ -1,7 +1,7 @@
-from blankly import Screener, Alpaca, ScreenerState
+from blankly import Screener, Binance, ScreenerState
 from blankly.indicators import rsi
 
-tickers = ['AAPL', 'GME', 'MSFT']  # any stocks that you may want
+tickers = ['BTC-USTD']  # any stocks that you may want
 
 
 # This function is our evaluator and runs per stock
@@ -23,7 +23,7 @@ def formatter(results, state: ScreenerState):
 
 
 if __name__ == "__main__":
-    alpaca = Alpaca()  # initialize our interface
-    screener = Screener(alpaca, is_stock_buy, symbols=tickers, formatter=formatter)  # find oversold
+    ex = Binance()  # initialize our interface
+    screener = Screener(ex, is_stock_buy, symbols=tickers, formatter=formatter)  # find oversold
 
     print(screener.formatted_results)

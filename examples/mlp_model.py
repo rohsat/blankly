@@ -8,7 +8,7 @@
 import numpy as np
 from blankly import trunc
 from blankly import Strategy, StrategyState, Interface
-from blankly import CoinbasePro
+from blankly import Binance
 from blankly.indicators import rsi, sma
 # You may need to "pip install scikit-learn" if you do not have this installed
 from sklearn.neural_network import MLPClassifier
@@ -49,7 +49,7 @@ def price_event(price, symbol, state: StrategyState):
 
     # comparing prev diff with current diff will show a cross
     if prediction > 0.4 and not variables['has_bought']:
-        interface.market_order(symbol, 'buy', trunc(interface.cash/price, 8))
+        interface.market_order(symbol, 'buy', trunc(interface.cash/price, 5))
         variables['has_bought'] = True
     elif prediction <= 0.4 and variables['has_bought']:
         # truncate is required due to float precision
@@ -58,11 +58,11 @@ def price_event(price, symbol, state: StrategyState):
 
 
 if __name__ == "__main__":
-    coinbase = CoinbasePro()
-    s = Strategy(coinbase)
+    ex = Binance()
+    s = Strategy(ex)
     # creating an init allows us to run the same function for
     # different tickers and resolutions
-    s.add_price_event(price_event, 'BTC-USD', resolution='1d', init=init)
+    s.add_price_event(price_event, 'BTC-USDT', resolution='4h', init=init)
     # s.add_price_event(price_event, 'AAPL', resolution='1d', init=init)
-    history = s.backtest(to='1y', initial_values={'USD': 100})
+    history = s.backtest(to='1y', initial_values={'USDT': 100})
     print(history)
